@@ -17,47 +17,10 @@ internal class CropOverlay: UIView {
     var tabbarHeight:CGFloat = 0.0
     var isSelected:Bool = false {
         didSet {
-            
-            self.centerButton?.isHidden = isSelected ? true : false
-            self.isMovable = isSelected ? true : false
-            self.isResizable = isSelected ? true : false
-            
-            _ = verticalLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            
-            _ = outerLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-
-            _ = topLeftCornerLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            
-            _ = topRightCornerLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            
-            _ = bottomLeftCornerLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            
-            _ = bottomRightCornerLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            
-            _ = horizontalLines.map {
-                $0.isHidden = isSelected ? false : true
-            }
-            _ = cornerButtons.map {
-                $0.isHidden = isSelected ? false : true
-            }
+            switchState()
         }
     }
     var outerLines = [UIView]()
-    var horizontalLines = [UIView]()
-    var verticalLines = [UIView]()
-    
     var topLeftCornerLines = [UIView]()
     var topRightCornerLines = [UIView]()
     var bottomLeftCornerLines = [UIView]()
@@ -93,6 +56,36 @@ internal class CropOverlay: UIView {
     internal required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         createLines()
+    }
+    
+    func switchState() {
+        self.centerButton?.isHidden = isSelected
+        self.isMovable = isSelected
+        self.isResizable = isSelected
+        
+        _ = outerLines.map {
+            $0.isHidden = !isSelected
+        }
+
+        _ = topLeftCornerLines.map {
+            $0.isHidden = !isSelected
+        }
+        
+        _ = topRightCornerLines.map {
+            $0.isHidden = !isSelected
+        }
+        
+        _ = bottomLeftCornerLines.map {
+            $0.isHidden = !isSelected
+        }
+        
+        _ = bottomRightCornerLines.map {
+            $0.isHidden = !isSelected
+        }
+        
+        _ = cornerButtons.map {
+            $0.isHidden = !isSelected
+        }
     }
     
     func generateLineFrame() {
@@ -188,34 +181,15 @@ internal class CropOverlay: UIView {
     }
     
     override func layoutSubviews() {
-        
         self.generateLineFrame()
         self.generateCorners()
         self.generateCentralButton()
-        
-        let lineThickness = lineWidth / UIScreen.main.scale
-        let vPadding = (bounds.height - outterGap * 2 - (lineThickness * CGFloat(horizontalLines.count))) / CGFloat(horizontalLines.count + 1)
-        let hPadding = (bounds.width - outterGap * 2 - (lineThickness * CGFloat(verticalLines.count))) / CGFloat(verticalLines.count + 1)
-        
-        for i in 0..<horizontalLines.count {
-            let hLine = horizontalLines[i]
-            let vLine = verticalLines[i]
-            
-            let vSpacing = (vPadding * CGFloat(i + 1)) + (lineThickness * CGFloat(i))
-            let hSpacing = (hPadding * CGFloat(i + 1)) + (lineThickness * CGFloat(i))
-            
-            hLine.frame = CGRect(x: outterGap, y: vSpacing + outterGap, width: bounds.width - outterGap * 2, height:  lineThickness)
-            vLine.frame = CGRect(x: hSpacing + outterGap, y: outterGap, width: lineThickness, height: bounds.height - outterGap * 2)
-        }
-        
+        self.switchState()
     }
     
     func createLines() {
         
         outerLines = [createLine(), createLine(), createLine(), createLine()]
-//        horizontalLines = [createLine(), createLine()]
-//        verticalLines = [createLine(), createLine()]
-        
         topLeftCornerLines = [createLine(), createLine()]
         topRightCornerLines = [createLine(), createLine()]
         bottomLeftCornerLines = [createLine(), createLine()]

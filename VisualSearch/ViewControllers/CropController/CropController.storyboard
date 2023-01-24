@@ -30,9 +30,8 @@
                                 <viewLayoutGuide key="safeArea" id="imK-wE-5xW"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Capture your product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9B-GA-tah" userLabel="Select product">
-                                <rect key="frame" x="134" y="418" width="125" height="15.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capture your product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9B-GA-tah" userLabel="Select product">
+                                <rect key="frame" x="134" y="692.33333333333337" width="125" height="15.666666666666629"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -58,7 +57,9 @@
                         <constraints>
                             <constraint firstItem="eFt-tP-sYT" firstAttribute="width" secondItem="eFt-tP-sYT" secondAttribute="height" id="0yG-0E-NeF"/>
                             <constraint firstItem="pIC-Zk-Q7O" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" id="16P-bm-lGt"/>
+                            <constraint firstItem="t9B-GA-tah" firstAttribute="centerX" secondItem="eFt-tP-sYT" secondAttribute="centerX" id="1Xm-86-q6o"/>
                             <constraint firstItem="0fJ-CL-6Vj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="9X8-8J-V8P"/>
+                            <constraint firstItem="eFt-tP-sYT" firstAttribute="top" secondItem="t9B-GA-tah" secondAttribute="bottom" constant="20" id="MpS-Cd-mVa"/>
                             <constraint firstItem="4uu-Hx-x5V" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="NNt-nz-axn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eFt-tP-sYT" secondAttribute="bottom" constant="20" id="Qw1-fC-nOQ"/>
                             <constraint firstItem="4uu-Hx-x5V" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="W66-eL-kpQ"/>

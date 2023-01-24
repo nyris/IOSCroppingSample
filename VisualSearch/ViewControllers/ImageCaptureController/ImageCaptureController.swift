@@ -72,16 +72,10 @@ final class ImageCaptureController: CameraController {
     func processedImageFlow(image:UIImage, originalImage:UIImage, offers:[Offer], boxes:[ExtractedObject], error:Error?) {
         self.captureButton.isEnabled = true
         
-        
         let storyboard = UIStoryboard(name: "CropController", bundle: Bundle.main)
         let controller = storyboard.instantiateInitialViewController() as! CropController
         controller.transfer(data: (image:image, original:originalImage, offers:offers, boxes:boxes))
         self.navigationController?.pushViewController(controller, animated: true)
-        
-        
-//        self.navigator()
-//            .to(type: CropController.self)
-//            .transfer(data: (image:image, original:originalImage, offers:offers, boxes:boxes))
     }
     
     func handleInvalidImageData() {
