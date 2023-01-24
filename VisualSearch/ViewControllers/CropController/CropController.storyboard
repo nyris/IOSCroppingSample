@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="roboto.regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Object proposal-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="CropController" title="Object proposal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="CropController" customModule="VisualSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pIC-Zk-Q7O">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <viewLayoutGuide key="safeArea" id="Csa-Gb-Jib"/>
+                            </imageView>
+                            <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4uu-Hx-x5V" userLabel="Dark view">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <viewLayoutGuide key="safeArea" id="imK-wE-5xW"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Capture your product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9B-GA-tah" userLabel="Select product">
+                                <rect key="frame" x="134" y="418" width="125" height="15.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="0fJ-CL-6Vj">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFt-tP-sYT" userLabel="selectionButton">
+                                <rect key="frame" x="161.66666666666666" y="728" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eFt-tP-sYT" secondAttribute="height" id="Xho-3T-0Yq"/>
+                                    <constraint firstAttribute="width" constant="70" id="ZAs-dZ-r7A"/>
+                                </constraints>
+                                <color key="tintColor" red="0.89019607840000003" green="0.1058823529" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="validate_icon"/>
+                                <connections>
+                                    <action selector="selectionAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TD5-Kn-lNc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eFt-tP-sYT" firstAttribute="width" secondItem="eFt-tP-sYT" secondAttribute="height" id="0yG-0E-NeF"/>
+                            <constraint firstItem="pIC-Zk-Q7O" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" id="16P-bm-lGt"/>
+                            <constraint firstItem="0fJ-CL-6Vj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="9X8-8J-V8P"/>
+                            <constraint firstItem="4uu-Hx-x5V" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="NNt-nz-axn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eFt-tP-sYT" secondAttribute="bottom" constant="20" id="Qw1-fC-nOQ"/>
+                            <constraint firstItem="4uu-Hx-x5V" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="W66-eL-kpQ"/>
+                            <constraint firstItem="pIC-Zk-Q7O" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="akA-Qs-NGh"/>
+                            <constraint firstItem="0fJ-CL-6Vj" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="cwk-jw-hOF"/>
+                            <constraint firstItem="pIC-Zk-Q7O" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="idu-lo-5KO"/>
+                            <constraint firstItem="4uu-Hx-x5V" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="jBa-AK-OTu"/>
+                            <constraint firstItem="eFt-tP-sYT" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ktZ-kZ-R4L"/>
+                            <constraint firstItem="pIC-Zk-Q7O" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="wsI-PT-Hyc"/>
+                            <constraint firstItem="4uu-Hx-x5V" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" id="yqo-nA-Eh0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="0fJ-CL-6Vj" id="xkh-fJ-ee6"/>
+                        <outlet property="darkView" destination="4uu-Hx-x5V" id="B5t-j2-fHK"/>
+                        <outlet property="imageView" destination="pIC-Zk-Q7O" id="PHS-Wu-8Rp"/>
+                        <outlet property="selectionButton" destination="eFt-tP-sYT" id="6FL-h4-3RC"/>
+                        <outlet property="selectionLable" destination="t9B-GA-tah" id="REw-VQ-jCS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="validate_icon" width="140" height="140"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

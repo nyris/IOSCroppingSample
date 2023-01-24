@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Camera-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ImageCaptureController" title="Camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ImageCaptureController" customModule="VisualSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YA1-yJ-Pks" userLabel="Camera View">
+                                <rect key="frame" x="0.0" y="-0.66666666666668561" width="393" height="853.33333333333348"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jX-ff-aai" userLabel="Dark view">
+                                <rect key="frame" x="0.0" y="-0.66666666666668561" width="393" height="853.33333333333348"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lOZ-Xo-v0W" userLabel="ActivityIndicator">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nb-hm-emu" userLabel="Capture Button">
+                                <rect key="frame" x="161.66666666666666" y="728" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="69I-ku-Hnf"/>
+                                    <constraint firstAttribute="width" secondItem="6nb-hm-emu" secondAttribute="height" id="EDJ-Ut-C1v"/>
+                                </constraints>
+                                <color key="tintColor" red="0.89019607840000003" green="0.1058823529" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="capture_icon"/>
+                                <connections>
+                                    <action selector="captureAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Pnu-ki-GCE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0jX-ff-aai" firstAttribute="height" secondItem="YA1-yJ-Pks" secondAttribute="height" id="2ry-Q5-ZgL"/>
+                            <constraint firstItem="YA1-yJ-Pks" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="5xd-ix-HwO"/>
+                            <constraint firstItem="0jX-ff-aai" firstAttribute="centerX" secondItem="YA1-yJ-Pks" secondAttribute="centerX" id="7Ng-FA-sm8"/>
+                            <constraint firstItem="0jX-ff-aai" firstAttribute="width" secondItem="YA1-yJ-Pks" secondAttribute="width" id="MYr-Kg-L8d"/>
+                            <constraint firstItem="0jX-ff-aai" firstAttribute="centerY" secondItem="YA1-yJ-Pks" secondAttribute="centerY" id="QNE-YG-iGH"/>
+                            <constraint firstItem="6nb-hm-emu" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="R7M-xD-d6p"/>
+                            <constraint firstItem="YA1-yJ-Pks" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" constant="1" id="URF-RJ-kms"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6nb-hm-emu" secondAttribute="bottom" constant="20" id="WCG-Mj-Mje"/>
+                            <constraint firstItem="YA1-yJ-Pks" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="cDE-ba-XdB"/>
+                            <constraint firstItem="lOZ-Xo-v0W" firstAttribute="centerY" secondItem="YA1-yJ-Pks" secondAttribute="centerY" id="dWN-Dg-8QF"/>
+                            <constraint firstItem="YA1-yJ-Pks" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="g4D-yk-09O"/>
+                            <constraint firstItem="lOZ-Xo-v0W" firstAttribute="centerX" secondItem="YA1-yJ-Pks" secondAttribute="centerX" id="l5m-xJ-ZKg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="lOZ-Xo-v0W" id="FYe-gw-RNb"/>
+                        <outlet property="cameraView" destination="YA1-yJ-Pks" id="8AO-en-1Nv"/>
+                        <outlet property="captureButton" destination="6nb-hm-emu" id="W89-51-z1b"/>
+                        <outlet property="darkView" destination="0jX-ff-aai" id="wqX-aM-JkJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="capture_icon" width="140" height="140"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
