@@ -13,10 +13,7 @@ final class ImageCaptureController: CameraController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var darkView: UIView!
-
-    
-    private var coordinator:ImageCaptureCoordinator!
-    
+    private var visualSearchService:VisualSearchService!
     override var isLoading:Bool {
         didSet(oldValue) {
             self.updateLoadingState()
@@ -25,8 +22,8 @@ final class ImageCaptureController: CameraController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coordinator = ImageCaptureCoordinator(controller: self)
-        self.setupUI()
+        visualSearchService = VisualSearchService(controller: self)
+        isLoading = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,14 +31,10 @@ final class ImageCaptureController: CameraController {
         self.resumeCamera()
     }
     
-    func setupUI() {
-        isLoading = false
-    }
-    
     func updateLoadingState() {
         DispatchQueue.main.async {
-            self.darkView.isHidden = self.isLoading == false
-            self.captureButton.isEnabled = self.isLoading == false
+            self.darkView.isHidden = !self.isLoading
+            self.captureButton.isEnabled = !self.isLoading
             self.isLoading == true ?
                 self.activityIndicator.startAnimating() :
                 self.activityIndicator.stopAnimating()
@@ -52,29 +45,31 @@ final class ImageCaptureController: CameraController {
     override func processCapturedImage(image: UIImage?, originalImage:UIImage?) {
 
         self.cameraManager.stop()
-        guard let validImage = image, let validOriginalImage = originalImage else {
+        guard let validImage = image else {
             self.showError(message: "Invalid Image")
             return
         }
- 
-        self.coordinator.getOffersWithBoxes(image: validImage) { (offers, boxes, error) in
-            self.isLoading = false
+        
+        self.isLoading = true
+        self.visualSearchService.getOffersWithBoxes(image: validImage) { (offers, boxes, error) in
             DispatchQueue.main.async {
-                self.processedImageFlow(image: validImage,
-                                        originalImage: validOriginalImage,
-                                        offers: offers,
-                                        boxes: boxes,
-                                        error: error)
+                self.isLoading = false
+                self.displayObjectProposal(image: validImage, offers: offers, boxes: boxes, error: error)
             }
         }
     }
     
-    func processedImageFlow(image:UIImage, originalImage:UIImage, offers:[Offer], boxes:[ExtractedObject], error:Error?) {
+    func displayObjectProposal(image:UIImage, offers:[Offer], boxes:[ExtractedObject], error:Error?) {
         self.captureButton.isEnabled = true
+        guard !boxes.isEmpty else {
+            self.showError(message: "No offers found")
+            self.cameraManager.start()
+            return
+        }
         
         let storyboard = UIStoryboard(name: "CropController", bundle: Bundle.main)
         let controller = storyboard.instantiateInitialViewController() as! CropController
-        controller.transfer(data: (image:image, original:originalImage, offers:offers, boxes:boxes))
+        controller.transfer(data: (image:image, offers:offers, boxes:boxes))
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

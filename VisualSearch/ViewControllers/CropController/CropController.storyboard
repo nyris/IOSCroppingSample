@@ -48,7 +48,7 @@
                                 <color key="tintColor" red="0.89019607840000003" green="0.1058823529" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="validate_icon"/>
                                 <connections>
-                                    <action selector="selectionAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TD5-Kn-lNc"/>
+                                    <action selector="onCrop:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zeT-Gk-EOC"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 import NyrisSDK
 
-final class ImageCaptureCoordinator {
+final class VisualSearchService {
     
     let controller:UIViewController
     let matchingService = ImageMatchingService()
@@ -23,7 +23,6 @@ final class ImageCaptureCoordinator {
     
     init(controller:UIViewController) {
         self.controller = controller
-        
         let language = matchingService.acceptLanguage
         matchingService.acceptLanguage = language == "DE" ? "DE" : "EN"
     }
@@ -31,8 +30,8 @@ final class ImageCaptureCoordinator {
     func getOffersWithBoxes(image:UIImage,
                             isSemanticSearch:Bool = false,
                             completion:@escaping ( _ offerList:[Offer], _ objects:[ExtractedObject], _ error:Error?) -> Void) {
-        dispatchGroup.enter()
         
+        dispatchGroup.enter()
         extractionService.getExtractObjects(from: image) { [weak self] (objects, error) in
             self?.handleExtractionResponse(objects: objects, error: error)
         }
@@ -43,15 +42,11 @@ final class ImageCaptureCoordinator {
         }
     
         dispatchGroup.notify(queue: .main) { [weak self] in
-            // offer
             completion(self?.offerList ?? [], self?.extractedObject ?? [], nil)
         }
     }
     
-    func getOffers(
-        image:UIImage,
-        isSemanticSearch:Bool = false,
-        completion:@escaping ( _ offerList:[Offer], _ error:Error?) -> Void) {
+    func getOffers(image:UIImage, isSemanticSearch:Bool = false, completion:@escaping ( _ offerList:[Offer], _ error:Error?) -> Void) {
         matchingService.getSimilarProducts(
             image: image,
             isSemanticSearch: isSemanticSearch) { [weak self] products, error in
@@ -61,19 +56,15 @@ final class ImageCaptureCoordinator {
     }
 
     func handleExtractionResponse(objects:[ExtractedObject]?, error:Error?) {
-        // save the boxes
         self.extractedObject = objects ?? []
         dispatchGroup.leave()
     }
     
-    func handleResponse(
-        similarProducts:[Offer]?,
-        error:Error?,
-        completion:@escaping ( _ offerList:[Offer], _ error:Error?) -> Void) {
+    func handleResponse(similarProducts:[Offer]?, error:Error?, completion:@escaping ( _ offerList:[Offer], _ error:Error?) -> Void) {
 
         guard error == nil else {
             controller.showError(title:"Error",
-                           message:"Something went wrong with our service. It’s our fault, not yours. Please try again.")
+                                 message:"Something went wrong with our service. It’s our fault, not yours. Please try again.")
             completion([], error)
             return
         }

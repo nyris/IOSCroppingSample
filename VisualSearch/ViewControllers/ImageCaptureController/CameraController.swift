@@ -53,7 +53,7 @@ class CameraController : UIViewController {
             self.cameraManager.updatePermission()
             return
         }
-        // saving the picture may take some time, lock to avoid spam the button
+        // saving the picture may take some time, lock to avoid button spam
         sender.isEnabled =  false
         
         // this method will save, rotate, and resize the picture
@@ -79,13 +79,9 @@ extension CameraController {
     func subscribeToApplicationEventNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(applicationSuspended), name: UIApplication.willResignActiveNotification, object: nil)
-        
         notificationCenter.addObserver(self, selector: #selector(applicationActivated), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
         notificationCenter.addObserver(self, selector: #selector(applicationSuspended), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        
         notificationCenter.addObserver(self, selector: #selector(applicationSuspended), name: UIApplication.willTerminateNotification, object: nil)
-        
         notificationCenter.addObserver(self, selector: #selector(applicationActivated), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
@@ -115,7 +111,7 @@ extension CameraController : CameraAuthorizationDelegate {
             }
             self.cameraManager.display(on: self.cameraView)
         default:
-            let message = "Capture your product"
+            let message = "Please authorize camera access to use this app"
             self.showError(message: message, okActionLogic: { (_) in
                 guard let url = URL(string: UIApplication.openSettingsURLString) else {
                     fatalError("Invalid application setting url")

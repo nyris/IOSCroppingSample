@@ -9,7 +9,7 @@
 import UIKit
 import NyrisSDK
 
-class CropController: UIViewController {
+final class CropController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var selectionButton: UIButton!
@@ -17,26 +17,12 @@ class CropController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var darkView: UIView!
     
-    var resizedImage:UIImage!
-    var coordinator:ImageCaptureCoordinator!
-    var navigationHeaderHeight:CGFloat {
-        return navigationController?.navigationBar.frame.size.height ?? 0
-    }
-    
-    var boundingBoxes:[CropOverlay] = []
-    var boxes:[ExtractedObject] = []
-    
     private let cropViewTag = -123
-    var isSelectionState = false {
-        didSet(newValue) {
-            if newValue {
-                self.setSelectionState()
-            }
-        }
-    }
-    
-    
-    var isLoading:Bool = false {
+    private var resizedImage:UIImage!
+    private var visualSearchService:VisualSearchService!
+    private var boundingBoxes:[CropOverlay] = []
+    private var boxes:[ExtractedObject] = []
+    private var isLoading:Bool = false {
         didSet(oldValue) {
             self.updateLoadingState()
         }
@@ -44,12 +30,7 @@ class CropController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coordinator = ImageCaptureCoordinator(controller: self)
-        self.bind()
-    }
-    
-
-    func bind() {
+        visualSearchService = VisualSearchService(controller: self)
         self.imageView.image = self.resizedImage
         self.displayBoundingBoxes()
     }
@@ -63,45 +44,27 @@ class CropController: UIViewController {
         }
     }
     
-    func setSelectionState() {
-        DispatchQueue.main.async {
-            self.selectionButton.isEnabled = true
-            // if we are not in selection state
-            // we are doing animation, so quickly display the box and make it none movable/resizable
-            self.boundingBoxes.first?.isSelected = false
-            self.boundingBoxes.first?.isMovable = true
-            self.boundingBoxes.first?.isResizable = true
-        }
-    }
-    
-    @IBAction func selectionAction(_ sender: Any) {
-        // get selected box
-        let selectedBox = self.boundingBoxes.filter {
-            $0.isSelected == true
-        }.first
+    @IBAction func onCrop(_ sender: Any) {
+        
+        self.isLoading = false
+        let selectedBox = self.boundingBoxes.filter({ $0.isSelected == true }).first
         
         guard let cropBox = selectedBox else {
-            self.isLoading = false
             self.showError(message: "Please Select a box")
             return
         }
 
-        let baseFrame = CGRect(
-            x: 0, y: 0,
-            width: self.resizedImage.size.width,
-            height: self.resizedImage.size.height
-        )
+        let baseFrame = CGRect(x: 0, y: 0, width: self.resizedImage.size.width, height: self.resizedImage.size.height)
         let projectedRect = cropBox.frame.projectOn(projectionFrame: baseFrame, from: imageView.frame)
         let cropedImage = ImageHelper.crop(image: self.resizedImage, croppingRect: projectedRect)
         
         guard let selectedImge = cropedImage else {
             self.showError(message: "The croped image is invalid, please retry again with different size")
-            self.isLoading = false
             return
         }
         
         self.isLoading = true
-        coordinator.getOffers(image: selectedImge) { (offerList, error) in
+        visualSearchService.getOffers(image: selectedImge) { (offerList, error) in
             
             self.isLoading = false
             guard error == nil else {
@@ -117,7 +80,6 @@ class CropController: UIViewController {
     func displayResults(offers:[Offer]) {
         guard offers.isEmpty == false else {
             self.showError(message: "No offers found")
-            self.isSelectionState = true
             return
         }
         let storyboard = UIStoryboard(name: "ProductListController", bundle: Bundle.main)
@@ -128,63 +90,44 @@ class CropController: UIViewController {
 }
 
 extension CropController: DataTransferProtocol {
-    typealias Data = (image:UIImage, original:UIImage, offers:[Offer], boxes:[ExtractedObject])
+    typealias Data = (image:UIImage, offers:[Offer], boxes:[ExtractedObject])
     
     func transfer(data: Data) {
         self.boxes = data.boxes
         self.resizedImage = data.image
-        
-        self.isSelectionState = self.boxes.isEmpty ? true : false
-        
-        // add at least one box if empty
-        if self.boxes.isEmpty {
-            let rect = CGRect(x: 0, y: 0,
-                              width: resizedImage.size.width,
-                              height: resizedImage.size.height)
-            let centralBox = ExtractedObject.central(to: rect)
-            self.boxes.append(centralBox)
-        }
     }
 }
 
 extension CropController {
     public func displayBoundingBoxes() {
         self.boundingBoxes.removeAll()
-        // get the heighest confidence object
-        self.boxes = self.boxes.sorted(by: { (object1, object2) -> Bool in
-            object1.confidence < object2.confidence
-        })
+        self.boxes = self.boxes.sorted(by: { $0.confidence < $1.confidence })
         
-        let mostConfidentBox = self.boxes.first
-        guard mostConfidentBox != nil else {
-            // invalid box
+        guard let mostConfidentBox = self.boxes.first else {
             return
         }
         
-        // hold referance to the CropOverlay of the most confident bounding box
-        var confidentCrop:CropOverlay?
-        
-        for box in self.boxes {
-            let crop = self.generateBox(
-                boxRect:box
-                .region
-                .normalized(sourceFrame: box.extractionFromFrame!).toCGRect(), outergap: 0)
-            if mostConfidentBox! == box {
-                confidentCrop = crop
-            }
+        for box in self.boxes where box.extractionFromFrame != nil {
+            let normalizedRect = box.region
+                .normalized(sourceFrame: box.extractionFromFrame!)
+                .toCGRect()
+            let crop = self.generateBox(boxRect: normalizedRect, outergap: 0)
             self.boundingBoxes.append(crop)
+            
+            if mostConfidentBox == box {
+                crop.isSelected = true
+            }
         }
-        
-        confidentCrop?.isSelected = true
+
         self.updateBoxesLayout()
     }
     
     func generateBox(boxRect:CGRect, outergap:CGFloat) -> CropOverlay {
-        let cameraOverlay = CropOverlay()
-        cameraOverlay.tag = cropViewTag
-        cameraOverlay.translatesAutoresizingMaskIntoConstraints = false
-        cameraOverlay.minimumSize = CGSize(width: 100, height: 100)
-        cameraOverlay.onSelected = { object in
+        let cropView = CropOverlay()
+        cropView.tag = cropViewTag
+        cropView.translatesAutoresizingMaskIntoConstraints = false
+        cropView.minimumSize = CGSize(width: 100, height: 100)
+        cropView.onSelected = { object in
             _ = self.boundingBoxes.map { $0.isSelected = false }
             object.isSelected = true
         }
@@ -199,23 +142,17 @@ extension CropController {
             width: viewSize.width * boxRect.size.width,
             height: viewSize.height * boxRect.size.height)
 
-        cameraOverlay.frame = destination
-        cameraOverlay.alpha = 0.8
+        cropView.frame = destination
+        cropView.alpha = 0.8
         
-        return cameraOverlay
+        return cropView
     }
     
     func updateBoxesLayout() {
-        // clear all boxes
-        for subview in view.subviews where subview.tag == cropViewTag {
-            subview.removeFromSuperview()
-        }
-        
-        for box in self.boundingBoxes {
-            view.addSubview(box)
-        }
-        
+        view.subviews
+            .filter({$0.tag == cropViewTag})
+            .forEach( { $0.removeFromSuperview() })
+        self.boundingBoxes.forEach({ view.addSubview($0) })
         view.bringSubviewToFront(selectionButton)
-        view.layoutSubviews()
     }
 }

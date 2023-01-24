@@ -23,7 +23,7 @@
 		135D854D297F9E4100217A6F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D854A297F9E4100217A6F /* CameraController.swift */; };
 		135D854E297F9E4100217A6F /* ImageCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D854B297F9E4100217A6F /* ImageCaptureController.swift */; };
 		135D8552297F9EFA00217A6F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D8551297F9EFA00217A6F /* UIViewController.swift */; };
-		135D8557297F9F9400217A6F /* ImageCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D8555297F9F9400217A6F /* ImageCaptureCoordinator.swift */; };
+		135D8557297F9F9400217A6F /* VisualSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D8555297F9F9400217A6F /* VisualSearchService.swift */; };
 		13C58AB6297FBD7C0039D501 /* ImageCaptureController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB5297FBD7C0039D501 /* ImageCaptureController.storyboard */; };
 		13C58AB8297FC0AA0039D501 /* CropController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB7297FC0AA0039D501 /* CropController.storyboard */; };
 		13C58AC5297FD3730039D501 /* NyrisSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C58AC1297FD2C30039D501 /* NyrisSDK.framework */; };
@@ -79,7 +79,7 @@
 		135D854A297F9E4100217A6F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		135D854B297F9E4100217A6F /* ImageCaptureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureController.swift; sourceTree = "<group>"; };
 		135D8551297F9EFA00217A6F /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		135D8555297F9F9400217A6F /* ImageCaptureCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureCoordinator.swift; sourceTree = "<group>"; };
+		135D8555297F9F9400217A6F /* VisualSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualSearchService.swift; sourceTree = "<group>"; };
 		13C58AB5297FBD7C0039D501 /* ImageCaptureController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageCaptureController.storyboard; sourceTree = "<group>"; };
 		13C58AB7297FC0AA0039D501 /* CropController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CropController.storyboard; sourceTree = "<group>"; };
 		13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nyris.IMX.iOS.xcodeproj; path = ../Nyris.IMX.iOS/Nyris.IMX.iOS.xcodeproj; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		135D84EE297F939F00217A6F /* VisualSearch */ = {
 			isa = PBXGroup;
 			children = (
-				135D8553297F9F9400217A6F /* Coordinators */,
+				135D8553297F9F9400217A6F /* Services */,
 				135D8550297F9EEA00217A6F /* Extensions */,
 				135D8529297F984F00217A6F /* Navigation */,
 				135D8509297F980500217A6F /* CustomViews */,
@@ -222,12 +222,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		135D8553297F9F9400217A6F /* Coordinators */ = {
+		135D8553297F9F9400217A6F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				135D8555297F9F9400217A6F /* ImageCaptureCoordinator.swift */,
+				135D8555297F9F9400217A6F /* VisualSearchService.swift */,
 			);
-			path = Coordinators;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		13C58ABC297FD2C30039D501 /* Products */ = {
@@ -353,7 +353,7 @@
 				135D851D297F980500217A6F /* CropView.swift in Sources */,
 				135D8521297F980500217A6F /* ProductListDataSource.swift in Sources */,
 				135D851F297F980500217A6F /* CropController.swift in Sources */,
-				135D8557297F9F9400217A6F /* ImageCaptureCoordinator.swift in Sources */,
+				135D8557297F9F9400217A6F /* VisualSearchService.swift in Sources */,
 				135D854E297F9E4100217A6F /* ImageCaptureController.swift in Sources */,
 				135D84F0297F939F00217A6F /* AppDelegate.swift in Sources */,
 				135D852D297F987E00217A6F /* DataTransferProtocol.swift in Sources */,
@@ -498,9 +498,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JKPGZ623Z2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VisualSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -527,9 +528,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JKPGZ623Z2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VisualSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

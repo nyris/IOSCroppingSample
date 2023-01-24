@@ -11,22 +11,17 @@ import NyrisSDK
 
 final class ProductListController : UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var resultLable: UILabel!
-    
+    var dataSource:ProductListDataSource!
+    var result:[Offer] = []
     var resultTitle:String {
         return "\(result.count) results"
     }
     
-    var dataSource:ProductListDataSource!
-    var result:[Offer] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
-        self.applyDesign()
-
         setupCollection()
+        self.title = resultTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
     
     func setupCollection() {
@@ -43,17 +38,6 @@ final class ProductListController : UIViewController {
             }
         }
     }
-    
-    func applyDesign() {
-        resultLable.clipsToBounds = true
-        resultLable.alpha = 1
-        resultLable.text = resultTitle
-    }
-    
-    @IBAction func backTaped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
 }
 
 extension ProductListController : DataTransferProtocol {
