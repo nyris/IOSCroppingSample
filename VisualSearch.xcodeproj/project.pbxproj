@@ -26,26 +26,8 @@
 		135D8557297F9F9400217A6F /* VisualSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D8555297F9F9400217A6F /* VisualSearchService.swift */; };
 		13C58AB6297FBD7C0039D501 /* ImageCaptureController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB5297FBD7C0039D501 /* ImageCaptureController.storyboard */; };
 		13C58AB8297FC0AA0039D501 /* CropController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB7297FC0AA0039D501 /* CropController.storyboard */; };
-		13C58AC5297FD3730039D501 /* NyrisSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C58AC1297FD2C30039D501 /* NyrisSDK.framework */; };
-		13C58AC6297FD3730039D501 /* NyrisSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13C58AC1297FD2C30039D501 /* NyrisSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13E1D2D52982DE4D00101781 /* NyrisSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 13E1D2D42982DE4D00101781 /* NyrisSDK */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		13C58AC0297FD2C30039D501 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A8B354761EA192740028A733;
-			remoteInfo = NyrisSDK;
-		};
-		13C58AC2297FD2C30039D501 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A8A2CB471F6BF7160081C554;
-			remoteInfo = NyrisSDKTests;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		13C58AC7297FD3730039D501 /* Embed Frameworks */ = {
@@ -54,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				13C58AC6297FD3730039D501 /* NyrisSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +63,6 @@
 		135D8555297F9F9400217A6F /* VisualSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualSearchService.swift; sourceTree = "<group>"; };
 		13C58AB5297FBD7C0039D501 /* ImageCaptureController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageCaptureController.storyboard; sourceTree = "<group>"; };
 		13C58AB7297FC0AA0039D501 /* CropController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CropController.storyboard; sourceTree = "<group>"; };
-		13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nyris.IMX.iOS.xcodeproj; path = ../Nyris.IMX.iOS/Nyris.IMX.iOS.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				135D8508297F94AF00217A6F /* Kingfisher in Frameworks */,
-				13C58AC5297FD3730039D501 /* NyrisSDK.framework in Frameworks */,
+				13E1D2D52982DE4D00101781 /* NyrisSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +81,6 @@
 		135D84E3297F939F00217A6F = {
 			isa = PBXGroup;
 			children = (
-				13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */,
 				135D84EE297F939F00217A6F /* VisualSearch */,
 				135D84ED297F939F00217A6F /* Products */,
 				13C58AC4297FD3730039D501 /* Frameworks */,
@@ -230,15 +209,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		13C58ABC297FD2C30039D501 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13C58AC1297FD2C30039D501 /* NyrisSDK.framework */,
-				13C58AC3297FD2C30039D501 /* NyrisSDKTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		13C58AC4297FD3730039D501 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +235,7 @@
 			name = VisualSearch;
 			packageProductDependencies = (
 				135D8507297F94AF00217A6F /* Kingfisher */,
+				13E1D2D42982DE4D00101781 /* NyrisSDK */,
 			);
 			productName = VisualSearch;
 			productReference = 135D84EC297F939F00217A6F /* VisualSearch.app */;
@@ -296,38 +267,16 @@
 			mainGroup = 135D84E3297F939F00217A6F;
 			packageReferences = (
 				135D8506297F94AF00217A6F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */,
 			);
 			productRefGroup = 135D84ED297F939F00217A6F /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 13C58ABC297FD2C30039D501 /* Products */;
-					ProjectRef = 13C58ABB297FD2C30039D501 /* Nyris.IMX.iOS.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				135D84EB297F939F00217A6F /* VisualSearch */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		13C58AC1297FD2C30039D501 /* NyrisSDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NyrisSDK.framework;
-			remoteRef = 13C58AC0297FD2C30039D501 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		13C58AC3297FD2C30039D501 /* NyrisSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NyrisSDKTests.xctest;
-			remoteRef = 13C58AC2297FD2C30039D501 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		135D84EA297F939F00217A6F /* Resources */ = {
@@ -585,6 +534,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nyris/Nyris.IMX.iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -592,6 +549,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 135D8506297F94AF00217A6F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		13E1D2D42982DE4D00101781 /* NyrisSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */;
+			productName = NyrisSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

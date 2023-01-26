@@ -2,6 +2,11 @@
 
 This repository contains a swift iOS project, that uses nyris SDK to take an image, see suggested objects from the image and enable custom cropping.
 
+# Dependencies
+The project has the following dependencies installed via swift package manager:
+- nyris 0.7.1: The main dependency to use nyris SDK, camera management and image manipulation.
+- kingfisher: remote image downloading.
+
 # Structure
 
 ## Camera
