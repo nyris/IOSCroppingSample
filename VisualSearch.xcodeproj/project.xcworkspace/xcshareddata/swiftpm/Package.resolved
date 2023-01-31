@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nyris/Nyris.IMX.iOS",
       "state" : {
-        "revision" : "d5b5484bf2eeea6806598fe0df3bc0a814df4bba",
-        "version" : "0.7.1"
+        "revision" : "a426b71e319f83dd3a3229da89c6546442621981",
+        "version" : "0.7.2"
       }
     }
   ],

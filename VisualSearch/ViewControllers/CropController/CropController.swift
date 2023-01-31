@@ -110,7 +110,6 @@ extension CropController {
         for box in self.boxes where box.extractionFromFrame != nil {
             let normalizedRect = box.region
                 .normalized(sourceFrame: box.extractionFromFrame!)
-                .toCGRect()
             let crop = self.generateBox(boxRect: normalizedRect, outergap: 0)
             self.boundingBoxes.append(crop)
             

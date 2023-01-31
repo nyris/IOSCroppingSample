@@ -26,7 +26,7 @@
 		135D8557297F9F9400217A6F /* VisualSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D8555297F9F9400217A6F /* VisualSearchService.swift */; };
 		13C58AB6297FBD7C0039D501 /* ImageCaptureController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB5297FBD7C0039D501 /* ImageCaptureController.storyboard */; };
 		13C58AB8297FC0AA0039D501 /* CropController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C58AB7297FC0AA0039D501 /* CropController.storyboard */; };
-		13E1D2D52982DE4D00101781 /* NyrisSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 13E1D2D42982DE4D00101781 /* NyrisSDK */; };
+		13F2FDBC29891D000035133C /* NyrisSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 13F2FDBB29891D000035133C /* NyrisSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,7 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				135D8508297F94AF00217A6F /* Kingfisher in Frameworks */,
-				13E1D2D52982DE4D00101781 /* NyrisSDK in Frameworks */,
+				13F2FDBC29891D000035133C /* NyrisSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +235,7 @@
 			name = VisualSearch;
 			packageProductDependencies = (
 				135D8507297F94AF00217A6F /* Kingfisher */,
-				13E1D2D42982DE4D00101781 /* NyrisSDK */,
+				13F2FDBB29891D000035133C /* NyrisSDK */,
 			);
 			productName = VisualSearch;
 			productReference = 135D84EC297F939F00217A6F /* VisualSearch.app */;
@@ -267,7 +267,7 @@
 			mainGroup = 135D84E3297F939F00217A6F;
 			packageReferences = (
 				135D8506297F94AF00217A6F /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */,
+				13F2FDBA29891D000035133C /* XCRemoteSwiftPackageReference "Nyris.IMX" */,
 			);
 			productRefGroup = 135D84ED297F939F00217A6F /* Products */;
 			projectDirPath = "";
@@ -534,12 +534,12 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */ = {
+		13F2FDBA29891D000035133C /* XCRemoteSwiftPackageReference "Nyris.IMX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nyris/Nyris.IMX.iOS";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.1;
+				minimumVersion = 0.7.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -550,9 +550,9 @@
 			package = 135D8506297F94AF00217A6F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		13E1D2D42982DE4D00101781 /* NyrisSDK */ = {
+		13F2FDBB29891D000035133C /* NyrisSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 13E1D2D32982DE4D00101781 /* XCRemoteSwiftPackageReference "Nyris.IMX" */;
+			package = 13F2FDBA29891D000035133C /* XCRemoteSwiftPackageReference "Nyris.IMX" */;
 			productName = NyrisSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
